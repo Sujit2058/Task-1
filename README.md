@@ -1,58 +1,77 @@
-Task Manager Pro – Flutter App
-Overview
+# 📝 Task Manager Pro (Flutter)
 
-Task Manager Pro is a simple Flutter application that allows users to track tasks dynamically. Users can view a list of pending tasks and add new tasks with simulated asynchronous delays, mimicking network calls. The app demonstrates state management, asynchronous operations, and responsive UI layout in Flutter.
+## 📌 Overview
 
-Features
+**Task Manager Pro** is a simple Flutter application built as part of a debugging and UI optimization task.  
+The app demonstrates proper **state management**, **asynchronous handling**, and **layout optimization** using Flutter best practices.
 
-Display a dynamic list of tasks
+Users can view a list of tasks and add new tasks with a simulated network delay while maintaining a responsive and stable UI.
 
-Add new tasks with a 2-second simulated delay
+---
 
-Loading indicator shown while tasks are being added
+## 🎯 Objective
 
-Prevents multiple taps during async operations
+- Fix layout and rendering issues
+- Handle asynchronous operations safely
+- Prevent UI freezes and crashes
+- Improve visual feedback and user experience
+- Follow Flutter coding standards and best practices
 
-Properly handles layout constraints with Expanded and ListView.builder
+---
+
+## ✨ Features
+
+- 📋 Display a dynamic list of tasks
+- ➕ Add new tasks with a simulated 2-second delay
+- ⏳ Loading indicator during async operations
+- 🚫 Disable button while loading to prevent duplicate actions
+- 📱 Responsive and crash-free UI
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Flutter
+- **Language:** Dart
+- **State Management:** `StatefulWidget` with `setState`
+- **Async Handling:** `Future` and `async/await`
+
+---
+
+## 📂 Project Structure
+
+lib/
+└── main.dart # Application entry point and UI logic
 
 
+---
 
-Technical Details
+## ▶️ How to Run
 
-Flutter Version: 3.x or higher
-
-State Management: StatefulWidget + setState
-
-Widgets Used: Scaffold, AppBar, Column, ListView.builder, Padding, ElevatedButton, CircularProgressIndicator, ListTile
-
-Async Handling: Future.delayed to simulate network delay
-
-Layout: Column + Expanded to ensure proper constraints
-
-Installation
-
-Clone the repository
-
-git clone https://github.com/<your-username>/task-manager-pro.git
-
-
-Navigate to the project folder
+1. Clone the repository:
+bash
+git clone https://github.com/your-username/task-manager-pro.git
+Navigate to the project directory:
 
 cd task-manager-pro
-
-
-Get dependencies
+Get dependencies:
 
 flutter pub get
-
-
-Run the app
+Run the app:
 
 flutter run
+## 🧠 Key Implementation Details
+Asynchronous Integrity
+Uses Future.delayed() to simulate a network request
 
-Code Snippet – Adding a Task
+UI remains responsive during delay
+
+Loading state handled using isLoading
+
 Future<void> _addTaskAsync() async {
-  setState(() => isLoading = true);
+  setState(() {
+    isLoading = true;
+  });
 
   await Future.delayed(Duration(seconds: 2));
 
@@ -61,46 +80,45 @@ Future<void> _addTaskAsync() async {
     isLoading = false;
   });
 }
+UI Optimization
+Expanded widget prevents layout overflow errors
 
+ListView.builder efficiently renders dynamic lists
 
-Updates isLoading to show a loading spinner
+CircularProgressIndicator provides visual feedback
 
-Adds a new task dynamically
+ElevatedButton(
+  onPressed: isLoading ? null : _addTaskAsync,
+  child: isLoading
+      ? CircularProgressIndicator(color: Colors.white)
+      : Text("Add Task After 2s Delay"),
+)
 
-Ensures UI rebuilds properly
+## 🐞 Bugs Fixed
+Issue	Solution
+ListView overflow crash	Wrapped in Expanded
+UI not updating	Proper use of setState
+Multiple button taps	Disabled button during loading
+Async UI freeze	Loading indicator + state control
+⚠️ Crash Risk Analysis
+❌ Calling setState after widget disposal → avoided
 
-Folder Structure
-task-manager-pro/
-│
-├── lib/
-│   └── main.dart       # Main app code
-│
-├── pubspec.yaml        # Flutter dependencies
-│
-└── README.md           # Project documentation
+❌ Unbounded ListView inside Column → fixed using Expanded
 
-Best Practices Followed
+❌ Multiple async calls → prevented with isLoading
 
-Async State Management: Ensures UI remains responsive during delays
+✅ App runs safely without render or state crashes
 
-Layout Safety: Expanded prevents unbounded height errors in ListView
+## 📈 Best Practices Followed
+Clean and readable code
 
-UX-Friendly: Loading indicators prevent multiple taps and provide feedback
+Proper widget tree hierarchy
 
-Clean Code: Proper naming conventions, modular logic, no unused variables
+Safe async handling
 
-Contribution
+UX-friendly loading states
 
-Fork the repository
+Flutter layout constraints respected
 
-Create a feature branch: git checkout -b feature-name
-
-Commit changes: git commit -m 'Add new feature'
-
-Push branch: git push origin feature-name
-
-Create a pull request
-
-License
-
-This project is MIT Licensed – see the LICENSE file for details.
+## Author
+## Sujit Prajapati
